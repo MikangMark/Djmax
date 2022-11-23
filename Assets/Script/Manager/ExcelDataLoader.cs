@@ -2,48 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExcelDataLoader : MonoBehaviour
+public class ExcelDataLoader : Singleton<ExcelDataLoader>
 {
-    public static ExcelDataLoader instance = null;
     public TextAsset txt;
-    public string[,] Sentence;
+    public string[,] soundInfo;
+    public int[,] note;
     [SerializeField]
-    int lineSize, rowSize;
-    // Start is called before the first frame update
-    private void Awake()
-    {
-        instance = this;
-    }
-    public static ExcelDataLoader Instance
-    {
-        get
-        {
-            if(null == instance)
-            {
-                return null;
-            }
-            return instance;
-        }
-    }
+    int lineSize, rowSize, infoLine;
 
+    string fileName;
+    int bpm;
+    int[] beat = new int[2];
+    int playtime_Seconds;
 
     void Start()
     {
-        
+        infoLine = 4;
         string currentText = txt.text.Substring(0, txt.text.Length - 1);
         string[] line = currentText.Split('\n');
         lineSize = line.Length;
         rowSize = line[0].Split('\t').Length;
-        Sentence = new string[lineSize, rowSize];
+        soundInfo = new string[infoLine, rowSize];
+        note = new int[lineSize - infoLine, rowSize];
 
         for(int i = 0; i < lineSize; i++)
         {
             string[] row = line[i].Split('\t');
             for(int j = 0; j < rowSize; j++)
             {
-                Sentence[i, j] = row[j];
+                if (i < 5)
+                {
+                    soundInfo[i, j] = row[j];
+                    Debug.Log(soundInfo[i, j]);
+                }
+                else
+                {
+                    note[i, j] = int.Parse(row[j]);
+                }
+                
             }
         }
+        fileName = soundInfo[0, 1];
+        bpm = int.Parse(soundInfo[1, 1]);
+        beat[0] = int.Parse(soundInfo[2, 1]);
+        beat[1] = int.Parse(soundInfo[2, 2]);
+        playtime_Seconds = int.Parse(soundInfo[3, 1]) * 60 + int.Parse(soundInfo[3, 2]);
     }
 
 }

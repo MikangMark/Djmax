@@ -6,6 +6,7 @@ public class CreateNoteMap : MonoBehaviour
 {
     public float default_Interval;
     public float half_Interval;
+    public GameObject[] startPositon;
     private void Awake()
     {
         default_Interval = 70;
@@ -14,9 +15,24 @@ public class CreateNoteMap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < ExcelDataLoader.Instance.Sentence.Length; i++)
+        startPositon = new GameObject[4];
+        for(int i = 0; i < 4; i++)
         {
+            startPositon[i] = GameObject.Find("NoteAppearLocation_" + i);
+        }
+        for (int i = 0; i < ExcelDataLoader.Instance.note.Length; i++)
+        {
+            if (i % 4 == 0)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (ExcelDataLoader.Instance.note[i, j] == 1)
+                    {
 
+                    }
+                }
+            }
+            
         }
     }
 
