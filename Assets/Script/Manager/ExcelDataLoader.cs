@@ -14,6 +14,7 @@ public class ExcelDataLoader : Singleton<ExcelDataLoader>
     int bpm;
     int[] beat = new int[2];
     int playtime_Seconds;
+    int total_Note = 0;
 
     void Start()
     {
@@ -30,14 +31,19 @@ public class ExcelDataLoader : Singleton<ExcelDataLoader>
             string[] row = line[i].Split('\t');
             for(int j = 0; j < rowSize; j++)
             {
-                if (i < 5)
+                if (i < infoLine)
                 {
                     soundInfo[i, j] = row[j];
-                    Debug.Log(soundInfo[i, j]);
+                    //Debug.Log(soundInfo[i, j]); //음악정보 디버그
                 }
                 else
                 {
-                    note[i, j] = int.Parse(row[j]);
+                    note[i - infoLine, j] = int.Parse(row[j]);
+                    if (int.Parse(row[j]) == 1)
+                    {
+                        total_Note++;
+                    }
+                    //Debug.Log(note[i - infoLine, j]); //노트채보 디버그
                 }
                 
             }
@@ -47,6 +53,7 @@ public class ExcelDataLoader : Singleton<ExcelDataLoader>
         beat[0] = int.Parse(soundInfo[2, 1]);
         beat[1] = int.Parse(soundInfo[2, 2]);
         playtime_Seconds = int.Parse(soundInfo[3, 1]) * 60 + int.Parse(soundInfo[3, 2]);
+        Debug.Log(total_Note);
     }
 
 }

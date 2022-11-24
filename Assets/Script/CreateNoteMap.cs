@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CreateNoteMap : MonoBehaviour
 {
-    public float default_Interval;
+    public float default_Interval; //yÁÂÇ¥°£°Ý
     public float half_Interval;
+    [HideInInspector]
     public GameObject[] startPositon;
     private void Awake()
     {
@@ -20,6 +21,8 @@ public class CreateNoteMap : MonoBehaviour
         {
             startPositon[i] = GameObject.Find("NoteAppearLocation_" + i);
         }
+        Debug.Log(ExcelDataLoader.Instance.note.Length);
+
         for (int i = 0; i < ExcelDataLoader.Instance.note.Length; i++)
         {
             if (i % 4 == 0)
@@ -28,7 +31,7 @@ public class CreateNoteMap : MonoBehaviour
                 {
                     if (ExcelDataLoader.Instance.note[i, j] == 1)
                     {
-
+                        NoteManager.Instance.CreateNote(j);
                     }
                 }
             }

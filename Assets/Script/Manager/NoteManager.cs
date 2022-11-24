@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoteManager : MonoBehaviour
+public class NoteManager : Singleton<NoteManager>
 {
     public int bpm = 0;
     double currentTime = 0d;
@@ -14,6 +14,7 @@ public class NoteManager : MonoBehaviour
     private void Start()
     {
         theTimingManager = GetComponent<TimingManager>();
+
     }
     // Update is called once per frame
     void Update()
@@ -22,6 +23,9 @@ public class NoteManager : MonoBehaviour
         if(currentTime >= 60d / bpm)
         {
             CreateNote(0);
+            CreateNote(1);
+            CreateNote(2);
+            CreateNote(3);
         }
     }
 

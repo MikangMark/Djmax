@@ -13,14 +13,14 @@ public class TimingManager : MonoBehaviour
     /*[SerializeField]
     Transform[] Center = null;
     [SerializeField]
-    RectTransform[][] timingRect = null;
+    RectTransform[,] timingRect = null;
     [SerializeField]
-    Vector2[][] timingBoxs = null;*/
+    Vector2[,] timingBoxs = null;*/
 
     // Start is called before the first frame update
     void Start()
     {
-        /*timingBoxs = new Vector2[4][];
+        /*timingBoxs = new Vector2[4,3];
         for(int i = 0; i < timingBoxs.Length; i++)
         {
             timingBoxs[i] = new Vector2[timingRect[i].Length];
