@@ -10,6 +10,7 @@ public class ExcelDataLoader : Singleton<ExcelDataLoader>
     [SerializeField]
     int lineSize, rowSize, infoLine;
 
+    Queue<int[]> note_q = new Queue<int[]>();
     string fileName;
     int bpm;
     int[] beat = new int[2];
@@ -29,23 +30,25 @@ public class ExcelDataLoader : Singleton<ExcelDataLoader>
         for(int i = 0; i < lineSize; i++)
         {
             string[] row = line[i].Split('\t');
+            int[] oneLine = new int[4];
             for(int j = 0; j < rowSize; j++)
             {
                 if (i < infoLine)
                 {
-                    soundInfo[i, j] = row[j];
+                    soundInfo[i, j] = row[j];//탭으로 구분된 원소들이 저장
                     //Debug.Log(soundInfo[i, j]); //음악정보 디버그
                 }
                 else
                 {
-                    note[i - infoLine, j] = int.Parse(row[j]);
+                    note[i - infoLine, j] = int.Parse(row[j]);//숫자들하나씩저장
+                    oneLine[j] = int.Parse(row[j]);
                     if (int.Parse(row[j]) == 1)
                     {
                         total_Note++;
                     }
                     //Debug.Log(note[i - infoLine, j]); //노트채보 디버그
                 }
-                
+                note_q.Enqueue(oneLine);
             }
         }
         fileName = soundInfo[0, 1];

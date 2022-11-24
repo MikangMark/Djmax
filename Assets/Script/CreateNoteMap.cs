@@ -39,9 +39,4 @@ public class CreateNoteMap : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

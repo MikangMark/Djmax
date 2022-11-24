@@ -22,10 +22,10 @@ public class NoteManager : Singleton<NoteManager>
         currentTime += Time.deltaTime;
         if(currentTime >= 60d / bpm)
         {
-            CreateNote(0);
-            CreateNote(1);
-            CreateNote(2);
-            CreateNote(3);
+            //CreateNote(0);
+            //CreateNote(1);
+            //CreateNote(2);
+            //CreateNote(3);
         }
     }
 
