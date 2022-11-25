@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoteManager : Singleton<NoteManager>
+public class NoteManager : MonoBehaviour
 {
     public int bpm = 0;
     double currentTime = 0d;
@@ -39,9 +39,10 @@ public class NoteManager : Singleton<NoteManager>
             collision.gameObject.SetActive(false);
         }
     }
-    public void CreateNote(int lineNum)
+    public void CreateNote(int lineNum, float delayPos_y)
     {
         GameObject t_note = ObjectPool.instance.noteQueue.Dequeue();
+        tfNoteAppear[lineNum].position = new Vector3(tfNoteAppear[lineNum].position.x, tfNoteAppear[lineNum].position.y + delayPos_y, tfNoteAppear[lineNum].position.z);
         t_note.transform.position = tfNoteAppear[lineNum].position;
         t_note.SetActive(true);
 

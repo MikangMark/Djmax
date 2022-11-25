@@ -9,7 +9,9 @@ public class CreateNoteMap : MonoBehaviour
     [HideInInspector]
     public GameObject[] startPositon;
 
-    int[,] noteLoad;
+    [SerializeField]
+    NoteManager noteManager;
+
     private void Awake()
     {
         default_Interval = 70;
@@ -24,26 +26,17 @@ public class CreateNoteMap : MonoBehaviour
             startPositon[i] = GameObject.Find("NoteAppearLocation_" + i);
         }
         Debug.Log(ExcelDataLoader.Instance.note.Length);
-
-        for (int i = 0; i < ExcelDataLoader.Instance.note.Length; i++)
+        
+        for (int i = 0; i < ExcelDataLoader.Instance.lineSize - ExcelDataLoader.Instance.infoLine; i++)
         {
-            if (i % 4 == 0)
+            for (int j = 0; j < ExcelDataLoader.Instance.rowSize; j++)
             {
-                for (int j = 0; j < 4; j++)
+                if (ExcelDataLoader.Instance.note[i, j] == 1)
                 {
-                    if (ExcelDataLoader.Instance.note[i, j] == 1)
-                    {
-                        NoteManager.Instance.CreateNote(j);
-                    }
+                    noteManager.CreateNote(j, i * default_Interval);
                 }
             }
-            
         }
-    }
-
-    void LoadNote()
-    {
-        noteLoad = ExcelDataLoader.Instance.note;
     }
 
 }

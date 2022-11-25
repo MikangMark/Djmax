@@ -7,8 +7,7 @@ public class ExcelDataLoader : Singleton<ExcelDataLoader>
     public TextAsset txt;
     public string[,] soundInfo;
     public int[,] note;
-    [SerializeField]
-    int lineSize, rowSize, infoLine;
+    public int lineSize, rowSize, infoLine;
     
     string fileName;
     int bpm;
