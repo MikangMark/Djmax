@@ -8,6 +8,8 @@ public class CreateNoteMap : MonoBehaviour
     public float half_Interval;
     [HideInInspector]
     public GameObject[] startPositon;
+
+    int[,] noteLoad;
     private void Awake()
     {
         default_Interval = 70;
@@ -37,6 +39,11 @@ public class CreateNoteMap : MonoBehaviour
             }
             
         }
+    }
+
+    void LoadNote()
+    {
+        noteLoad = ExcelDataLoader.Instance.note;
     }
 
 }
