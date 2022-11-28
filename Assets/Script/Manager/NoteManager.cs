@@ -7,14 +7,16 @@ public class NoteManager : MonoBehaviour
     public int bpm = 0;
     double currentTime = 0d;
 
+    //[SerializeField]
+    //Transform[] tfNoteAppear = null;
     [SerializeField]
-    Transform[] tfNoteAppear = null;
+    Transform[] tfNoteAppear_Default = null;
     TimingManager theTimingManager;
 
     private void Start()
     {
         theTimingManager = GetComponent<TimingManager>();
-
+        //tfNoteAppear_Default = tfNoteAppear;
     }
     // Update is called once per frame
     void Update()
@@ -22,10 +24,7 @@ public class NoteManager : MonoBehaviour
         currentTime += Time.deltaTime;
         if(currentTime >= 60d / bpm)
         {
-            //CreateNote(0);
-            //CreateNote(1);
-            //CreateNote(2);
-            //CreateNote(3);
+            
         }
     }
 
@@ -42,8 +41,9 @@ public class NoteManager : MonoBehaviour
     public void CreateNote(int lineNum, float delayPos_y)
     {
         GameObject t_note = ObjectPool.instance.noteQueue.Dequeue();
-        tfNoteAppear[lineNum].position = new Vector3(tfNoteAppear[lineNum].position.x, tfNoteAppear[lineNum].position.y + delayPos_y, tfNoteAppear[lineNum].position.z);
-        t_note.transform.position = tfNoteAppear[lineNum].position;
+        t_note.transform.position = tfNoteAppear_Default[lineNum].position + Vector3.up * delayPos_y;
+        
+        //t_note.transform.position = tfNoteAppear[lineNum].position;
         t_note.SetActive(true);
 
         theTimingManager.boxNoteList.Add(t_note);

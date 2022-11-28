@@ -3871,8 +3871,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe89e9b66ec154499da478994519033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  default_Interval: 0
-  half_Interval: 0
   startPositon:
   - {fileID: 0}
   - {fileID: 0}
@@ -3950,7 +3948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bpm: 120
-  tfNoteAppear:
+  tfNoteAppear_Default:
   - {fileID: 1767869478}
   - {fileID: 28151011}
   - {fileID: 1554666785}
@@ -4264,7 +4262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectInfo:
   - goPrefab: {fileID: 8987861676277935625, guid: 4de0c9047937821419e5caea3c48ad36, type: 3}
-    count: 16
+    count: 100
     tfPoolParent: {fileID: 1747609902}
 --- !u!1 &2079716709
 GameObject:
