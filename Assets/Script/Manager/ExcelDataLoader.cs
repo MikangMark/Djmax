@@ -43,7 +43,7 @@ public class ExcelDataLoader : Singleton<ExcelDataLoader>
                         //읽은숫자가 1일경우 노트생성
                         total_Note++;
                     }
-                    Debug.Log(note[i - infoLine, j]); //노트채보 디버그
+                    //Debug.Log(note[i - infoLine, j]); //노트채보 디버그
                 }
             }
         }

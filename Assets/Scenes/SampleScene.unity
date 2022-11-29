@@ -3992,12 +3992,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxNoteList: []
-  Center: {fileID: 648943596}
-  timingRect:
+  Center:
+  - {fileID: 648943596}
+  - {fileID: 1535237878}
+  - {fileID: 1060270007}
+  - {fileID: 237306341}
+  timingRect_0:
   - {fileID: 863639033}
   - {fileID: 759649133}
   - {fileID: 3013062}
   - {fileID: 1033558836}
+  timingRect_1:
+  - {fileID: 430655180}
+  - {fileID: 1631919462}
+  - {fileID: 1008705527}
+  - {fileID: 1371065868}
+  timingRect_2:
+  - {fileID: 511374471}
+  - {fileID: 73801706}
+  - {fileID: 1283845534}
+  - {fileID: 1107866233}
+  timingRect_3:
+  - {fileID: 612727237}
+  - {fileID: 42536032}
+  - {fileID: 315176120}
+  - {fileID: 1270881579}
 --- !u!1 &1767869477
 GameObject:
   m_ObjectHideFlags: 0

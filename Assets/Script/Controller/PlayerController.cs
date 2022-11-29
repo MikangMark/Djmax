@@ -14,7 +14,19 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            theTimingManager.CheckTiming();
+            theTimingManager.CheckTiming(0);
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            theTimingManager.CheckTiming(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Semicolon))
+        {
+            theTimingManager.CheckTiming(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Quote))
+        {
+            theTimingManager.CheckTiming(3);
         }
     }
 }

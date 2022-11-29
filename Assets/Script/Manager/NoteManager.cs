@@ -41,6 +41,7 @@ public class NoteManager : MonoBehaviour
     public void CreateNote(int lineNum, float delayPos_y)
     {
         GameObject t_note = ObjectPool.instance.noteQueue.Dequeue();
+        t_note.GetComponent<Note>().line_num = lineNum;
         t_note.transform.position = tfNoteAppear_Default[lineNum].position + Vector3.up * delayPos_y;
         
         //t_note.transform.position = tfNoteAppear[lineNum].position;

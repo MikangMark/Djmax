@@ -25,7 +25,7 @@ public class CreateNoteMap : MonoBehaviour
         {
             startPositon[i] = GameObject.Find("NoteAppearLocation_" + i);
         }
-        Debug.Log(ExcelDataLoader.Instance.lineSize - ExcelDataLoader.Instance.infoLine);
+        //Debug.Log(ExcelDataLoader.Instance.lineSize - ExcelDataLoader.Instance.infoLine);
         
         for (int i = 0; i < ExcelDataLoader.Instance.lineSize - ExcelDataLoader.Instance.infoLine; i++)
         {

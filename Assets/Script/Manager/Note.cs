@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Note : MonoBehaviour
 {
     public float noteSpeed;
+    public int line_num;
 
     Image noteImage;
     // Update is called once per frame
