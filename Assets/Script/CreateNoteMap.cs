@@ -4,19 +4,13 @@ using UnityEngine;
 
 public class CreateNoteMap : MonoBehaviour
 {
-    static public float default_Interval; //y謝ル除問
-    static public float half_Interval;
+    public float default_Interval; //y謝ル除問
     [HideInInspector]
     public GameObject[] startPositon;
 
     [SerializeField]
     NoteManager noteManager;
 
-    private void Awake()
-    {
-        default_Interval = 70;
-        half_Interval = default_Interval * 0.5f;
-    }
     // Start is called before the first frame update
     void Start()
     {

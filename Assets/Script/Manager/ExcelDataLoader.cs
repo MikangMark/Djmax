@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
+public class LoadSongInfo
+{
+    public int song_num;
+    public string song_name;
+    public TextAsset textAsset;
+    public int bpm;
+}
 public class ExcelDataLoader : Singleton<ExcelDataLoader>
 {
+    public LoadSongInfo[] info;
     public TextAsset txt;
     public string[,] soundInfo;
     public int[,] note;
@@ -18,6 +26,7 @@ public class ExcelDataLoader : Singleton<ExcelDataLoader>
     void Start()
     {
         infoLine = 4;
+        txt = info[PlayerPrefs.GetInt("SelectSong")].textAsset;
         string currentText = txt.text.Substring(0, txt.text.Length - 1);
         string[] line = currentText.Split('\n');
         lineSize = line.Length;
@@ -48,7 +57,7 @@ public class ExcelDataLoader : Singleton<ExcelDataLoader>
             }
         }
         fileName = soundInfo[0, 1];
-        bpm = int.Parse(soundInfo[1, 1]);
+        bpm = info[PlayerPrefs.GetInt("SelectSong")].bpm = int.Parse(soundInfo[1, 1]);
         beat[0] = int.Parse(soundInfo[2, 1]);
         beat[1] = int.Parse(soundInfo[2, 2]);
         playtime_Seconds = int.Parse(soundInfo[3, 1]) * 60 + int.Parse(soundInfo[3, 2]);

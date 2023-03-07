@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class TimingManager : MonoBehaviour
 {
     public List<GameObject> boxNoteList = new List<GameObject>();
@@ -10,6 +10,8 @@ public class TimingManager : MonoBehaviour
     [SerializeField]
     RectTransform[] timingRect = null;
     Vector2[] timingBoxs = null;*/
+    [SerializeField]
+    TextMeshProUGUI judgePrint;
     [SerializeField]
     Transform[] Center = null;
     [SerializeField]
@@ -24,15 +26,21 @@ public class TimingManager : MonoBehaviour
     RectTransform[,] timingRect = null;
     int line = 4;
     int judge_Count = 4;
+    int combo;
+    int maxCombo;
     [SerializeField]
     Vector2[,] timingBoxs = null;
+    public int[] judgeTotal_Count;
 
     // Start is called before the first frame update
     void Start()
     {
+        judgePrint.gameObject.SetActive(false);
+        combo = maxCombo = 0;
         timingBoxs = new Vector2[line, judge_Count];
         timingRect = new RectTransform[line, judge_Count];
-        for(int i = 0; i < line; i++)
+        judgeTotal_Count = new int[4] { 0, 0, 0, 0 };
+        for (int i = 0; i < line; i++)
         {
             for(int j = 0; j < judge_Count; j++)
             {
@@ -73,37 +81,60 @@ public class TimingManager : MonoBehaviour
     {
         for(int i = 0; i < boxNoteList.Count; i++)
         {
-            float t_notePosY = boxNoteList[i].transform.localPosition.y;
-
-            for (int y = 0; y < judge_Count; y++)
+            if(boxNoteList[i].GetComponent<Note>().line_num == line)
             {
-                if (timingBoxs[line, y].x <= t_notePosY && t_notePosY <= timingBoxs[line, y].y)
+                float t_notePosY = boxNoteList[i].transform.localPosition.y;
+
+                for (int y = 0; y < judge_Count; y++)
                 {
-                    if(line == boxNoteList[i].GetComponent<Note>().line_num)
+                    if (timingBoxs[line, y].x <= t_notePosY && t_notePosY <= timingBoxs[line, y].y)
                     {
                         boxNoteList[i].GetComponent<Note>().HideNote();
                         boxNoteList.RemoveAt(i);
+                        judgeTotal_Count[y]++;
+                        if (y < 2)
+                        {
+                            combo++;
+                            if (maxCombo <= combo)
+                            {
+                                maxCombo = combo;
+                            }
+                            
+                        }
+                        else
+                        {
+                            combo = 0;
+                        }
+                        StartCoroutine(PrintJudge(y));
+                        PlayerPrefs.SetInt("MaxCombo", maxCombo);
                         Debug.Log("Hit" + line);
+                        return;
                     }
-                    return;
                 }
             }
         }
-        /*for (int i = 0; i < boxNoteList.Count; i++)
+    }
+    IEnumerator PrintJudge(int judge)
+    {
+        switch (judge)
         {
-            float t_notePosY = boxNoteList[i].transform.localPosition.y;
+            case 0:
+                judgePrint.text = "Perfect";
+                break;
+            case 1:
+                judgePrint.text = "Great";
+                break;
+            case 2:
+                judgePrint.text = "Bad";
+                break;
+            case 3:
+                judgePrint.text = "Miss";
+                break;
 
-            for (int y = 0; y < timingBoxs.Length; y++)
-            {
-                if (timingBoxs[y].x <= t_notePosY && t_notePosY <= timingBoxs[y].y)
-                {
-                    boxNoteList[i].GetComponent<Note>().HideNote();
-                    boxNoteList.RemoveAt(i);
-                    Debug.Log("Hit" + y);
-                    return;
-                }
-            }
-        }*/
-        Debug.Log("Miss");
+        }
+        judgePrint.gameObject.SetActive(true);
+        
+        yield return new WaitForSeconds(1.0f);
+        judgePrint.gameObject.SetActive(false);
     }
 }
